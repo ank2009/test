@@ -1,0 +1,66 @@
+public class CtrlTechnicalSales {  
+    public  Account acc { get; set; }
+    public boolean editMode { get; set; }
+    public  CtrlTechnicalSales()
+    {
+        String idParam = ApexPages.currentPage().getParameters().get('id');
+        if(idParam == null)
+        {
+             throw new Generic.StandardException('This event doesn\'t relate to Account');
+        }
+        List<Account> accs = [select Id, Name, AccountNumber, Need_for_SRM__c, Name_TMS_Provider__c, TMS_Other__c, 
+                              Satisfied_current_TMS__c, Planned_to_change_TMS1__c, Orders_from_EDI_or_Transwide__c, FMS_Provider__c,
+                              WKTS_Company_Type__c, Total_employees__c, Total_number_of_planners__c, AnnualRevenue, Industry,
+                              Number_of_trucks_owned__c, Total_number_of_trucks_managed__c, Type_of_Trucks__c, Number_of_operations_per_week__c,
+                              Import__c, Export__c, National__c, Sites__c, Nbr_of_Warehouses__c, Type_of_Transportation__c, Type_of_Freight__c,
+                              Traffic_area__c, Consulting__c, Posting__c, Potential_Yearly_Posting_Domestic__c, Potential_Yearly_Posting_International__c,
+                              ERP_in_use__c, AS_Provider__c, WMS_Provider__c, Where_loads_the_customer__c, Square_Meters_total__c,
+                              Same_Variable_Routes__c, Big_Poster__c, Posting_Interface__c
+               				  from Account  where Id =: idParam];
+        if(accs.size() == 0)
+        {
+            throw new Generic.StandardException('This event doesn\'t relate to Account');
+        }
+        acc = accs[0];
+        editMode = false;
+    }
+    
+    public PageReference Edit()
+    {
+        editMode = true;
+        return null;
+    }
+    
+    public PageReference Save()
+    {
+        try
+        {
+            update acc;
+        }
+        catch (DMLException e)
+        {
+    	    	ApexPages.addMessages(e);
+    		    return null;
+        }
+        
+        String activityId = ApexPages.currentPage().getParameters().get('activityid');
+        if (activityId != null)
+            return new PageReference ('/'+activityId);
+        return new PageReference ('/'+acc.Id);
+    }
+
+    public PageReference Cancel()
+    {
+        if(editMode)
+        {
+            editMode = false;
+            PageReference pageRef = new PageReference('/apex/TechnicalSales?id='+acc.Id);
+            return pageRef;
+        }
+        String activityId = ApexPages.currentPage().getParameters().get('activityid');
+        if (activityId != null)
+            return new PageReference ('/'+activityId);
+        return new PageReference ('/'+acc.Id);
+    }
+    
+}
