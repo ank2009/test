@@ -818,15 +818,15 @@ public without sharing class TRIG_AccountTriggerHandler extends TRIG_TriggerHand
         }
     }
 	
-	private void SetTFXAgreedMigrationEvolutionDate222(List<Account> newValues, Map<Id, sObject> oldObjectsMap)
+	private void Ser(List<Account> newValues, Map<Id, sObject> oldObjectsMap)
     {
-        for(Account acc : newValues)
-        {
-            Date previousAgreedDate = ((Account)oldObjectsMap.get(acc.Id)).Sales_TFX_Migration_Start_Date__c;
-            if(acc.Sales_TFX_Migration_Start_Date__c != null && acc.Sales_TFX_Migration_Start_Date__c != previousAgreedDate)
-            {
-                acc.TFX_Agreed_Migration_Evolution_Date__c = Date.today();
-            }
-        }
+        Map<String,Country_Parameters__c> params = Country_Parameters__c.getAll();
+		for(Account a: accounts)
+		{
+			if(params.containsKey(a.ShippingCountry))
+			{
+				a.ISO2_Country_Code__c = params.get(a.ShippingCountry).ISO2_code__c;
+			}
+		}
     }
 }
