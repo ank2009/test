@@ -829,4 +829,16 @@ public without sharing class TRIG_AccountTriggerHandler extends TRIG_TriggerHand
 			}
 		}
     }
+	
+	private void SetTFXAgreedMigrationEvolutionDate111(List<Account> newValues, Map<Id, sObject> oldObjectsMap)
+    {
+        for(Account acc : newValues)
+        {
+            Date previousAgreedDate = ((Account)oldObjectsMap.get(acc.Id)).Sales_TFX_Migration_Start_Date__c;
+            if(acc.Sales_TFX_Migration_Start_Date__c != null && acc.Sales_TFX_Migration_Start_Date__c != previousAgreedDate)
+            {
+                acc.TFX_Agreed_Migration_Evolution_Date__c = Date.today();
+            }
+        }
+    }
 }
