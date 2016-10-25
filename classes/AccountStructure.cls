@@ -76,7 +76,7 @@ public with sharing class AccountStructure{
         List<Boolean> levelFlag     = new List<Boolean>{};
         List<Boolean> closeFlag     = new List<Boolean>{};
         String nodeId               = '0';
-        String nodeType             = 'child';11
+        String nodeType             = 'child';1111
         Integer count               = 0;
         Integer level               = 0;
         Boolean endOfStructure      = false;
