@@ -76,4 +76,10 @@ public with sharing class AccountHierarchyTestData{
 		 integer i = 0;
 		 
 	}
+	
+	public static void createTestHierarchy5()
+	{
+		 integer i = 0;
+		 
+	}
 }
