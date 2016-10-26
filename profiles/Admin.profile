@@ -5956,7 +5956,7 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
-        <field>Case.Service_Access__c</field>
+        <field>Case.Service_Acces1111s__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
