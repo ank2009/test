@@ -4,7 +4,6 @@
 * @createddate 06/08/2010
 */
 public with sharing class AccountHierarchyTestData{
-	qqqqq
 	/**
 	* Set the necesary attributes used during test
 	*/
@@ -65,4 +64,10 @@ public with sharing class AccountHierarchyTestData{
         testUtils.testAccList.clear();
         testUtils.testAccList.addAll( subAccountsList );
     }
+	
+	public static void createTestHierarchy()
+	{
+		 integer i = 0;
+		 
+	}
 }
